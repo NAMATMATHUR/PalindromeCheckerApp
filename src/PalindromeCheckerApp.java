@@ -11,14 +11,11 @@ public class PalindromeCheckerApp {
         System.out.print("Enter a sentence: ");
         String input = scanner.nextLine();
 
-        // Remove spaces and special characters
+        // Remove non-alphanumeric characters & lowercase
         String cleaned = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        String reversed = "";
-
-        for (int i = cleaned.length() - 1; i >= 0; i--) {
-            reversed += cleaned.charAt(i);
-        }
+        // Use StringBuilder to reverse
+        String reversed = new StringBuilder(cleaned).reverse().toString();
 
         if (cleaned.equals(reversed)) {
             System.out.println("It is a Palindrome");
