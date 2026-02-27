@@ -1,40 +1,42 @@
-<<<<<<< HEAD
+import java.util.Stack;
 import java.util.Scanner;
-=======
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker Application");
-    }
->>>>>>> feature/UC1
 
-public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker Application");
-    }
+public class PalindromeStack {
 
-    public static void main(String[] args) {
+    public static boolean isPalindromeUC5(String input) {
+        if (input == null || input.isEmpty()) return false;
 
-        // UC1: Welcome message
-        System.out.println("Welcome to Palindrome Checker Application");
+        // Optional: Normalize to lowercase for better accuracy
+        String cleanInput = input.toLowerCase();
 
-        // UC3: Palindrome check using user input
-        Scanner scanner = new Scanner(System.in);
+        // Step 1: Initialize the Stack
+        Stack<Character> stack = new Stack<>();
 
-        System.out.print("Enter a word: ");
-        String word = scanner.nextLine();
-
-        String reversed = "";
-
-        // Reverse the string
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed += word.charAt(i);
+        // Step 2: Push all characters onto the stack
+        for (int i = 0; i < cleanInput.length(); i++) {
+            stack.push(cleanInput.charAt(i));
         }
 
-        // Case-insensitive palindrome check
-        if (word.equalsIgnoreCase(reversed)) {
-            System.out.println(word + " is a Palindrome");
+        // Step 3: Pop and compare with the original string
+        for (int i = 0; i < cleanInput.length(); i++) {
+            // The stack pops in reverse order (LIFO)
+            if (cleanInput.charAt(i) != stack.pop()) {
+                return false; // Mismatch found
+            }
+        }
+
+        return true; // All characters matched
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string to check (UC5 - Stack): ");
+        String userInput = scanner.nextLine();
+
+        if (isPalindromeUC5(userInput)) {
+            System.out.println("Result: '" + userInput + "' is a palindrome.");
         } else {
-            System.out.println(word + " is NOT a Palindrome");
+            System.out.println("Result: '" + userInput + "' is NOT a palindrome.");
         }
 
         scanner.close();
