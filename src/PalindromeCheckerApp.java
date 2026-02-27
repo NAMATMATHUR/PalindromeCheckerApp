@@ -1,43 +1,44 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.Scanner;
 
-public class PalindromeStack {
+public class PalindromeQueueStack {
 
-    public static boolean isPalindromeUC5(String input) {
+    public static boolean isPalindromeUC6(String input) {
         if (input == null || input.isEmpty()) return false;
 
-        // Optional: Normalize to lowercase for better accuracy
+        // Normalize input (ignore case)
         String cleanInput = input.toLowerCase();
 
-        // Step 1: Initialize the Stack
-        Stack<Character> stack = new Stack<>();
+        // Step 1: Initialize Data Structures
+        Queue<Character> queue = new LinkedList<>(); // Queue (FIFO)
+        Stack<Character> stack = new Stack<>();      // Stack (LIFO)
 
-        // Step 2: Push all characters onto the stack
-        for (int i = 0; i < cleanInput.length(); i++) {
-            stack.push(cleanInput.charAt(i));
+        // Step 2: Fill both structures
+        for (char c : cleanInput.toCharArray()) {
+            queue.add(c);  // Enqueue
+            stack.push(c); // Push
         }
 
-        // Step 3: Pop and compare with the original string
-        for (int i = 0; i < cleanInput.length(); i++) {
-            // The stack pops in reverse order (LIFO)
-            if (cleanInput.charAt(i) != stack.pop()) {
+        // Step 3: Compare Dequeue (Original) vs Pop (Reverse)
+        while (!stack.isEmpty()) {
+            // dequeue() gets the first char, pop() gets the last char
+            if (!queue.remove().equals(stack.pop())) {
                 return false; // Mismatch found
             }
         }
 
-        return true; // All characters matched
+        return true; // All characters matched symmetrically
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string to check (UC5 - Stack): ");
+        System.out.print("Enter string (UC6 - Queue + Stack): ");
         String userInput = scanner.nextLine();
 
-        if (isPalindromeUC5(userInput)) {
-            System.out.println("Result: '" + userInput + "' is a palindrome.");
-        } else {
-            System.out.println("Result: '" + userInput + "' is NOT a palindrome.");
-        }
+        boolean result = isPalindromeUC6(userInput);
+        System.out.println("Is Palindrome: " + result);
 
         scanner.close();
     }
