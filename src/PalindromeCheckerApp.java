@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
@@ -5,8 +7,12 @@ public class PalindromeCheckerApp {
         // UC1: Welcome message
         System.out.println("Welcome to Palindrome Checker Application");
 
-        // UC2: Hardcoded palindrome
-        String word = "madam";  // Hardcoded input
+        // UC3: Palindrome check using user input
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
+
         String reversed = "";
 
         // Reverse the string
@@ -14,11 +20,13 @@ public class PalindromeCheckerApp {
             reversed += word.charAt(i);
         }
 
-        // Check palindrome
-        if (word.equals(reversed)) {
+        // Case-insensitive palindrome check
+        if (word.equalsIgnoreCase(reversed)) {
             System.out.println(word + " is a Palindrome");
         } else {
             System.out.println(word + " is NOT a Palindrome");
         }
+
+        scanner.close();
     }
 }
