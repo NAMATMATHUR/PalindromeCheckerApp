@@ -1,44 +1,30 @@
 import java.util.Scanner;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
+        // UC1: Welcome message
         System.out.println("Welcome to Palindrome Checker Application");
 
+        // UC3: Palindrome check using user input
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a word or sentence to check: ");
-        String input = scanner.nextLine();
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
 
-        // Clean input: remove non-alphanumeric characters & lowercase
-        String cleaned = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        String reversed = "";
 
-        // ---------- UC7: Deque-Based Palindrome Check ----------
-        Deque<Character> deque = new ArrayDeque<>();
-
-        // Add characters to deque
-        for (char c : cleaned.toCharArray()) {
-            deque.addLast(c);
+        // Reverse the string
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversed += word.charAt(i);
         }
 
-        boolean isPalindrome = true;
-
-        while (deque.size() > 1) {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-            if (front != rear) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        if (isPalindrome) {
-            System.out.println("It is a Palindrome (Deque Optimized)!");
+        // Case-insensitive palindrome check
+        if (word.equalsIgnoreCase(reversed)) {
+            System.out.println(word + " is a Palindrome");
         } else {
-            System.out.println("It is NOT a Palindrome (Deque Optimized)!");
+            System.out.println(word + " is NOT a Palindrome");
         }
 
         scanner.close();
