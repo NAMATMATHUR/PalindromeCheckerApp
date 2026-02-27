@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import java.util.Scanner;
+=======
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        System.out.println("Welcome to Palindrome Checker Application");
+    }
+>>>>>>> feature/UC1
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
