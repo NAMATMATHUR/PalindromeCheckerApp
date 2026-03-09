@@ -1,34 +1,44 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker Application");
+
+    public static boolean isPalindromeUC6(String input) {
+        if (input == null || input.isEmpty()) return false;
+
+        String cleanInput = input.toLowerCase();
+
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : cleanInput.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
+        }
+
+        while (!stack.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
 
-        // UC1: Welcome message
-        System.out.println("Welcome to Palindrome Checker Application");
-
-        // UC3: Palindrome check using user input
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a word: ");
-        String word = scanner.nextLine();
+        System.out.println("Welcome to Palindrome Checker Application");
 
-        String reversed = "";
+        System.out.print("Enter string (UC6 - Queue + Stack): ");
+        String userInput = scanner.nextLine();
 
-        // Reverse the string
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed += word.charAt(i);
-        }
+        boolean result = isPalindromeUC6(userInput);
 
-        // Case-insensitive palindrome check
-        if (word.equalsIgnoreCase(reversed)) {
-            System.out.println(word + " is a Palindrome");
-        } else {
-            System.out.println(word + " is NOT a Palindrome");
-        }
+        System.out.println("Is Palindrome: " + result);
 
         scanner.close();
     }
